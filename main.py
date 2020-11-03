@@ -15,7 +15,7 @@ radius = 40
 x = randint(100, 400)
 present_state = 0
 
-bg = pygame.image.load("bg.jpg")
+bg = pygame.image.load("images/bg.jpg")
 
 
 def drawWindow():
