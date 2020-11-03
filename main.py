@@ -20,11 +20,18 @@ for i in range(1, 11):
     meteor.append(pygame.image.load("images/meteor/meteor" + str(i) + ".jpg"))
 meteor_num = 0
 
+type_write = pygame.font.SysFont('PainterPersonalUseOnly-Br0w.ttf', 42)
+num = 9
+num_meteor = type_write.render(str(num), 1, (0, 0, 0))
 
 def drawWindow():
     global meteor_num
     win.blit(bg, (0, 0))
     win.blit(meteor[meteor_num], (x, y))
+    if num < 10:
+        win.blit(num_meteor, (x + 65, y + 85))
+    else:
+        win.blit(num_meteor, (x + 57, y + 85))
     meteor_num = (meteor_num + 1) % 10
     pygame.display.update()
 
