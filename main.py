@@ -46,6 +46,17 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            # check if clicking is around meteor
+            # generation a new position
+            for i in range(20, 100):
+                for k in range(20, 100):
+                    if event.pos == (x+i, y+k):
+                        win.blit(bg, (0, 0))
+                        y = -40
+                        x = randint(100, 400)
+                        pygame.display.update()
+
     keys = pygame.key.get_pressed()
     y += speed
 
@@ -55,4 +66,5 @@ while run:
 
     drawWindow()
     pygame.display.update()
+
 pygame.quit()
