@@ -88,9 +88,10 @@ def flower(meteor_num):
     global win
     x = meteors[meteor_num][2]
     y = meteors[meteor_num][3]
-    for _ in range(10):
+    for i in range(10):
         for frame in range(20):
-            win.blit(flower_img[frame], (x + 30, y + i * 20 + frame))
+            win.blit(flower_img[frame], (x + 30, y + i * 10 + frame))
+        pygame.display.update()
 
 
 # function witch say that is number correct or not
@@ -138,14 +139,14 @@ def on_fall_meteor(meteor_num: int, is_correct):
     x = meteors[meteor_num][2]
     y = meteors[meteor_num][3]
     # print('on_fall_meteor')
-    if not is_correct(meteors[meteor_num]):
+    if is_correct(meteors[meteor_num][0]):
         game_over()
         del meteors[meteor_num]
     else:
         # print('now flower')
         flower(meteor_num)
         del meteors[meteor_num]
-        # score += 1
+        score += 1
 
 
 def drawWindow():
@@ -193,15 +194,12 @@ while run:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             # check if clicking is around meteor
             for i in range(len(meteors)):
-                print('Hello', i)
                 x = round(meteors[i][2])
                 y = round(meteors[i][3])
                 exit_cycle = False
-                print(event.pos, x, y)
                 for d_x in range(45, 95):
                     for d_y in range(20, 123):
                         if event.pos == (x+d_x, y+d_y):
-                            print('World')
                             on_click_meteor(i, what_type_nums(regime))
                             pygame.display.update()
                             exit_cycle = True
