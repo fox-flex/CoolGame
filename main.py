@@ -1,6 +1,7 @@
 import pygame
 from random import randint
 from time import sleep
+from game_over import game_over
 
 
 pygame.init()
@@ -70,7 +71,6 @@ def check_lives():
     global lives
     lives -= 1
     if lives == 0:
-        pygame.mixer.Sound.play(loss_sound)
         # in production:
         game_over()
         return False
@@ -78,9 +78,12 @@ def check_lives():
         return True
 
 
-def game_over():
-    sleep(2)
-    pygame.quit()
+# def game_over():
+#     pygame.mixer.Sound.play(loss_sound)
+#     meteors.clear()
+#     drawWindow()
+#     sleep(1.55)
+#     pygame.quit()
 
 
 def flower(meteor_num):
@@ -163,8 +166,6 @@ def drawWindow():
     win.blit(score_img, (28, 60))
 
     # draw meteors
-    if len(meteors) < 2:
-        add_meteor()
     for i in range(len(meteors)):
         meteor_num = meteors[i][0]
         x_cord = meteors[i][2]
@@ -179,6 +180,8 @@ def drawWindow():
         else:
             win.blit(meteors[i][4], (x_cord + 57, y_cord + 85))
     pygame.display.update()
+    if len(meteors) < 2:
+        add_meteor()
 
 
 # body of game
@@ -219,14 +222,15 @@ while run:
         y += speed
         if y >= 530:
             on_fall_meteor(i, what_type_nums(regime))
+            run = False
             break
         else:
             meteors[i][2] = x
             meteors[i][3] = y
+    if not run:
+        break
 
     speed = 5 + score / 10
 
     drawWindow()
     pygame.display.update()
-
-pygame.quit()
