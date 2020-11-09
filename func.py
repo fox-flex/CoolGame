@@ -49,7 +49,7 @@ def even() -> list:
     """
     n = 100
     even_lst = []
-    for num in range(n+1):
-        if num / 2 == 0:
+    for num in range(2, n+1):
+        if num % 2 == 0:
             even_lst.append(num)
     return set(even_lst)
