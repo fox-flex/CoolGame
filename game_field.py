@@ -1,6 +1,7 @@
 import pygame
 from random import randint
 from time import sleep
+from func import sieve_flavius, ulam, even
 
 # from game_over import game_over
 
@@ -15,7 +16,7 @@ speed = 5
 present_state = 0
 score = 0
 max_num = 100
-regime = 'ulam'
+regime = 'even'
 lives = 3
 
 meteors = []
@@ -101,7 +102,7 @@ def game_field():
         sleep(1.55)
         pygame.quit()
 
-    def flower(meteor_num):
+    # def flower(meteor_num):
         # global flower_img
         # global win
         # x = meteors[meteor_num][2]
@@ -110,17 +111,25 @@ def game_field():
         #     for frame in range(20):
         #         win.blit(flower_img[frame], (x + 30, y + i * 10 + frame))
         #     pygame.display.update()
-        pass
+        # pass
 
     # function witch say that is number correct or not
-    def is_happy(num: int) -> bool:
-        return True
+    def is_even(num: int) -> bool:
+        if num in even():
+            return True
+        else:
+            return False
+
 
     def is_lucky(num: int) -> bool:
-        return True
+        if num in sieve_flavius():
+            return True
+        else:
+            return False
+
 
     def is_ulam(num: int) -> bool:
-        if num % 2 == 0:
+        if num in ulam():
             return True
         else:
             return False
@@ -128,8 +137,8 @@ def game_field():
     def what_type_nums(regime):
         if regime == 'ulam':
             return is_ulam
-        if regime == 'happy':
-            return is_happy
+        if regime == 'even':
+            return is_even
         if regime == 'lucky':
             return is_lucky
 
@@ -149,8 +158,8 @@ def game_field():
     def on_fall_meteor(meteor_num: int, is_correct):
         global score
         global meteors
-        x = meteors[meteor_num][2]
-        y = meteors[meteor_num][3]
+        # x = meteors[meteor_num][2]
+        # y = meteors[meteor_num][3]
         # print('on_fall_meteor')
         if is_correct(meteors[meteor_num][0]):
             game_over()
@@ -226,7 +235,6 @@ def game_field():
             y = meteors[i][3]
             meteors[i][2] = x
             meteors[i][3] = y
-            keys = pygame.key.get_pressed()
             y += speed
             if y >= 530:
                 on_fall_meteor(i, what_type_nums(regime))

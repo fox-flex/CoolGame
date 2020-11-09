@@ -1,7 +1,10 @@
 import pygame
 pygame.init()
 
+run = True
+
 def game_over():
+    global run
     display_width = 1000
     display_height = 720
     go_bckgr = pygame.image.load('earth_1234.jpg')
@@ -18,13 +21,16 @@ def game_over():
 
     display.update()
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_SPACE:
-                #open run game function
-                pass
-            elif event.key == pygame.K_m:
-                #open menu function
-                pass
+    while run:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+                break
+                pygame.quit()
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_SPACE:
+                    #open run game function
+                    pass
+                elif event.key == pygame.K_m:
+                    #open menu function
+                    pass

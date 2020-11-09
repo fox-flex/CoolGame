@@ -1,8 +1,8 @@
 import math
 
-def sieve_flavius() -> list:
+def sieve_flavius() -> set:
     """
-    Return list with lucky numbers.
+    Return set with lucky numbers.
     """
     n = 100
     pointer = 1
@@ -17,9 +17,9 @@ def sieve_flavius() -> list:
         pointer += 1
     return set(lst)
 
-def ulam() -> list:
+def ulam() -> set:
     """
-    Return list with ulam numbers.
+    Return set with ulam numbers.
     """
     ulams=[]
     ulams.append(1)
@@ -43,9 +43,9 @@ def ulam() -> list:
         ulams.append(newUlam)
     return set(ulams)
 
-def even() -> list:
+def even() -> set:
     """
-    Return list with even numbers.
+    Return set with even numbers.
     """
     n = 100
     even_lst = []
