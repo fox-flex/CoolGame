@@ -7,7 +7,7 @@ pygame.init()
 def Settings():
     size = [700,520]
 
-    screen = display.set_mode(size)
+    screen = win.set_mode(size)
     pygame.display.set_caption('Settings')
 
     image1 = pygame.image.load('settings.jpg')

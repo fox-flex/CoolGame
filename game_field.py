@@ -3,7 +3,7 @@ from random import randint
 from time import sleep
 from func import sieve_flavius, ulam, even
 
-# from game_over import game_over
+import game_over
 
 
 pygame.init()
@@ -90,17 +90,18 @@ def game_field():
         lives -= 1
         if lives == 0:
             # in production:
-            game_over()
+            game_over.game_over()
             return False
         else:
             return True
 
-    def game_over():
-        pygame.mixer.Sound.play(loss_sound)
-        meteors.clear()
-        drawWindow()
-        sleep(1.55)
-        pygame.quit()
+    # def game_over():
+    # def game_over():
+    #     pygame.mixer.Sound.play(loss_sound)
+    #     meteors.clear()
+    #     drawWindow()
+    #     sleep(1.55)
+    #     pygame.quit()
 
     # def flower(meteor_num):
         # global flower_img
@@ -153,7 +154,7 @@ def game_field():
         elif check_lives():
             del meteors[meteor_num]
         else:
-            game_over()
+            game_over.game_over()
 
     def on_fall_meteor(meteor_num: int, is_correct):
         global score
@@ -162,11 +163,11 @@ def game_field():
         # y = meteors[meteor_num][3]
         # print('on_fall_meteor')
         if is_correct(meteors[meteor_num][0]):
-            game_over()
+            game_over.game_over()
             del meteors[meteor_num]
         else:
             # print('now flower')
-            flower(meteor_num)
+            # flower(meteor_num)
             del meteors[meteor_num]
             score += 1
 
@@ -238,7 +239,6 @@ def game_field():
             y += speed
             if y >= 530:
                 on_fall_meteor(i, what_type_nums(regime))
-                run = False
                 break
             else:
                 meteors[i][2] = x

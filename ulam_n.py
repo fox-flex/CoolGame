@@ -12,7 +12,7 @@ def ulam_num():
     follow2 = font.render('як найменше ціле число більше за Un-1, яке єдиним чином ',1,(255,0,0))
     follow3 = font.render('розкладається в суму двох різних попередніх членів послідовності.',1,(255,0,0))
 
-    screen = display.set_mode(size)
+    screen = win.set_mode(size)
     pygame.display.set_caption('Ulam')
     fon_image = pygame.image.load('synfon.jpg')
     button_ok = pygame.image.load('ok.png')
@@ -45,7 +45,7 @@ def happy_num():
     follow2 = font.render('наступний член якої є сумою квадратів цифр попереднього,',1,(255,0,0))
     follow3 = font.render('містить член рівний одиниці.',1,(255,0,0))
 
-    screen = display.set_mode(size)
+    screen = win.set_mode(size)
     pygame.display.set_caption('Happy')
     fon_image = pygame.image.load('synfon.jpg')
     button_ok = pygame.image.load('ok.png')
@@ -78,7 +78,7 @@ def lucky_num():
     follow2 = font.render('наступний член якої є сумою квадратів цифр попереднього,',1,(255,0,0))
     follow3 = font.render('містить член рівний одиниці.',1,(255,0,0))
 
-    screen = display.set_mode(size)
+    screen = win.set_mode(size)
     pygame.display.set_caption('Lucky')
     fon_image = pygame.image.load('synfon.jpg')
     button_ok = pygame.image.load('ok.png')
