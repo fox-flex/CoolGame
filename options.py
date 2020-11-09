@@ -1,6 +1,5 @@
 import pygame
 from pygame import display
-
 pygame.init()
 
 
@@ -10,23 +9,23 @@ def Settings():
     screen = display.set_mode(size)
     pygame.display.set_caption('Settings')
 
-    image1 = pygame.image.load('settings.jpg')
+    image1 = pygame.image.load('images/options/settings.jpg')
     pygame.display.set_icon(image1)
 
-    fon_image = pygame.image.load('synfon.jpg')
-    button_happy = pygame.image.load('happy.png')
-    button_lucky = pygame.image.load('lucky.png')
-    button_ulam = pygame.image.load('Ulam.png')
-    button_easy = pygame.image.load('easy.png')
-    button_medium = pygame.image.load('mediums.png')
-    button_hard = pygame.image.load('hard.png')
-    button_gal = pygame.image.load('galochka.png')
-    button_ok = pygame.image.load('ok.png')
-    button_regym = pygame.image.load('regym.png')
-    button_level = pygame.image.load('emh.png')
-    button_znak = pygame.image.load('znakpyt.png')
+    fon_image = pygame.image.load('images/options/synfon.jpg')
+    button_happy = pygame.image.load('images/options/happy.png')
+    button_lucky = pygame.image.load('images/options/lucky.png')
+    button_ulam = pygame.image.load('images/options/Ulam.png')
+    button_easy = pygame.image.load('images/options/easy.png')
+    button_medium = pygame.image.load('images/options/mediums.png')
+    button_hard = pygame.image.load('images/options/hard.png')
+    button_gal = pygame.image.load('images/options/galochka.png')
+    button_ok = pygame.image.load('images/options/ok.png')
+    button_regym = pygame.image.load('images/options/regym.png')
+    button_level = pygame.image.load('images/options/emh.png')
+    button_znak = pygame.image.load('images/options/znakpyt.png')
 
-    dod_op_ul = pygame.image.load('options.png')
+    # dod_op_ul = pygame.image.load('images/options/options.png')
     button_znak = pygame.transform.scale(button_znak, (40, 40))
     # startcordinates
     x = 100
@@ -112,56 +111,47 @@ def Settings():
                 run = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 position_mouse = pygame.mouse.get_pos()
-                # regym
+                # regime
                 if position_mouse[0] >= x and position_mouse[1] >= y_ulam:
-                    if position_mouse[0] <= x + 150 and position_mouse[
-                        1] <= y_ulam + but_height:
+                    if position_mouse[0] <= x + 150 and position_mouse[1] <= y_ulam + but_height:
                         ulam = True
                         lucky = False
                         happy = False
                 if position_mouse[0] >= x and position_mouse[1] >= y_lucky:
-                    if position_mouse[0] <= x + 130 and position_mouse[
-                        1] <= y_lucky + but_height:
+                    if position_mouse[0] <= x + 130 and position_mouse[1] <= y_lucky + but_height:
                         ulam = False
                         lucky = True
                         happy = False
                 if position_mouse[0] >= x and position_mouse[1] >= y_happy:
-                    if position_mouse[0] <= x + 150 and position_mouse[
-                        1] <= y_happy + but_height:
+                    if position_mouse[0] <= x + 150 and position_mouse[1] <= y_happy + but_height:
                         ulam = False
                         lucky = False
                         happy = True
                 # level
                 if position_mouse[0] >= x_lev and position_mouse[1] >= y_ulam:
-                    if position_mouse[0] <= x_lev + 95 and position_mouse[
-                        1] <= y_ulam + but_height:
+                    if position_mouse[0] <= x_lev + 95 and position_mouse[1] <= y_ulam + but_height:
                         easy = True
                         medium = False
                         hard = False
                 if position_mouse[0] >= x_lev and position_mouse[1] >= y_lucky:
-                    if position_mouse[0] <= x_lev + 120 and position_mouse[
-                        1] <= y_lucky + but_height:
+                    if position_mouse[0] <= x_lev + 120 and position_mouse[1] <= y_lucky + but_height:
                         easy = False
                         medium = True
                         hard = False
                 if position_mouse[0] >= x_lev and position_mouse[1] >= y_happy:
-                    if position_mouse[0] <= x_lev + 120 and position_mouse[
-                        1] <= y_happy + but_height:
+                    if position_mouse[0] <= x_lev + 120 and position_mouse[1] <= y_happy + but_height:
                         easy = False
                         medium = False
                         hard = True
                         # dod_info
                 if position_mouse[0] >= 30 and position_mouse[1] >= y_happy:
-                    if position_mouse[0] <= 60 and position_mouse[
-                        1] <= y_happy + but_height:
+                    if position_mouse[0] <= 60 and position_mouse[1] <= y_happy + but_height:
                         happy_number = True
                 if position_mouse[0] >= 30 and position_mouse[1] >= y_lucky:
-                    if position_mouse[0] <= 60 and position_mouse[
-                        1] <= y_lucky + but_height:
+                    if position_mouse[0] <= 60 and position_mouse[1] <= y_lucky + but_height:
                         lucky_number = True
                 if position_mouse[0] >= 30 and position_mouse[1] >= y_ulam:
-                    if position_mouse[0] <= 60 and position_mouse[
-                        1] <= y_ulam + but_height:
+                    if position_mouse[0] <= 60 and position_mouse[1] <= y_ulam + but_height:
                         ulam_number = True
                 if position_mouse[0] >= 310 and position_mouse[1] >= 470:
                     if position_mouse[0] <= 350 and position_mouse[1] <= 520:

@@ -1,8 +1,5 @@
 import pygame
-
 pygame.init()
-
-from game_field import game_field
 
 
 def game_intro():

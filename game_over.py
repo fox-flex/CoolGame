@@ -4,14 +4,14 @@ import game_field
 pygame.init()
 
 
-run = True
+run_field = True
 win = pygame.display.set_mode((1000, 720))
 meteors = []
 lives = 3
 
 
 def game_over():
-    global run
+    global run_field
     global win
     global meteors
     global lives
