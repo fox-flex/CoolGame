@@ -12,7 +12,8 @@ height = 60
 speed = 5
 present_state = 0
 score = 0
-max_num = 100
+min_num = 1
+max_num = 128
 regime = 'even'
 lives = 3
 run_field = True
@@ -33,6 +34,7 @@ def game_field():
     global height
     global speed
     global score
+    global min_num
     global max_num
     global regime
     global lives
@@ -54,6 +56,7 @@ def game_field():
 
     def add_meteor():
         global meteors
+        global min_num
         global max_num
         """
         new_meteor[0] -> number on meteor
@@ -62,7 +65,7 @@ def game_field():
         new_meteor[3] -> coordinate on the Y-axis
         new_meteor[4] -> image of number on meteor
         """
-        meteor_num = randint(1, max_num)
+        meteor_num = randint(min_num, max_num)
         meteors_num_txt = type_write.render(str(meteor_num), True,
                                             (100, 100, 150))
         meteors.append(
@@ -181,8 +184,11 @@ def game_field():
             # draw meteor's num
             if meteor_num < 10:
                 win.blit(meteors[i][4], (x_cord + 65, y_cord + 85))
-            else:
+            elif meteor_num < 100:
                 win.blit(meteors[i][4], (x_cord + 57, y_cord + 85))
+            else:
+                win.blit(meteors[i][4], (x_cord + 49, y_cord + 85))
+
         pygame.display.update()
         if len(meteors) < 2:
             add_meteor()
@@ -558,8 +564,9 @@ def game_intro():
                 if position[0] >= display_width/3.3 and position[1] >= display_height/2:
                     if position[0] <= (display_width/3.3)+200 and position[1] <= (display_height/2)+200:
                         # on click help
-                        pygame.quit()
-                        quit()
+                        pygame.mixer.Sound.play(loss_sound)
+                        # pygame.quit()
+                        # quit()
                 if position[0] >= display_width/1.8 and position[1] >= display_height/2.2:
                     if position[0] <= (display_width/1.8)+250 and position[1] <= (display_height/2.2)+75:
                         # on click settings
@@ -569,13 +576,15 @@ def game_intro():
                 if position[0] >= display_width/1.8 and position[1] >= display_height/1.8:
                     if position[0] <= (display_width/1.8)+250 and position[1] <= (display_height/1.8)+75:
                         # on click achievements
-                        pygame.quit()
-                        quit()
+                        pygame.mixer.Sound.play(loss_sound)
+                        # pygame.quit()
+                        # quit()
                 if position[0] >= display_width/1.8 and position[1] >= display_height/1.49:
                     if position[0] <= (display_width/1.8)+250 and position[1] <= (display_height/1.49)+75:
                         # on click donations
-                        pygame.quit()
-                        quit()
+                        pygame.mixer.Sound.play(loss_sound)
+                        # pygame.quit()
+                        # quit()
         gameDisplay.blit(img_2, (x_intro, y_intro))
         gameDisplay.blit(logotype, ((display_width/3.5), (display_height/20)))
         gameDisplay.blit(story_1, ((display_width/2.7), (display_height/6)))
