@@ -101,4 +101,6 @@ def lucky_num():
                     run = False
         pygame.display.update()
     pygame.quit()
+
+
 ulam_num()

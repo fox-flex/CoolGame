@@ -2,37 +2,40 @@ import pygame
 from pygame import display
 
 pygame.init()
+# win = pygame.display.set_mode((1000, 720))
+screen = pygame.display.set_mode((700, 520))
 
 
 def Settings():
-    size = [700,520]
-
-    screen = win.set_mode(size)
+    size = [700, 520]
+    # global win
+    global screen
+    # screen = win.set_mode(size)
     pygame.display.set_caption('Settings')
 
-    image1 = pygame.image.load('settings.jpg')
+    image1 = pygame.image.load('images/options/settings.jpg')
     pygame.display.set_icon(image1)
-    
-    fon_image = pygame.image.load('synfon.jpg')
-    button_happy = pygame.image.load('happy.png')
-    button_lucky = pygame.image.load('lucky.png')
-    button_ulam = pygame.image.load('Ulam.png')
-    button_easy = pygame.image.load('easy.png')
-    button_medium = pygame.image.load('mediums.png')
-    button_hard = pygame.image.load('hard.png')
-    button_gal = pygame.image.load('galochka.png')
-    button_ok = pygame.image.load('ok.png')
-    button_regym = pygame.image.load('regym.png')
-    button_level = pygame.image.load('emh.png')
-    button_znak = pygame.image.load('znakpyt.png')
 
-    dod_op_ul = pygame.image.load('options.png')
-    button_znak = pygame.transform.scale(button_znak,(40,40))
-    #startcordinates
+    fon_image = pygame.image.load('images/options/synfon.jpg')
+    button_happy = pygame.image.load('images/options/happy.png')
+    button_lucky = pygame.image.load('images/options/lucky.png')
+    button_ulam = pygame.image.load('images/options/Ulam.png')
+    button_easy = pygame.image.load('images/options/easy.png')
+    button_medium = pygame.image.load('images/options/mediums.png')
+    button_hard = pygame.image.load('images/options/hard.png')
+    button_gal = pygame.image.load('images/options/galochka.png')
+    button_ok = pygame.image.load('images/options/ok.png')
+    button_regym = pygame.image.load('images/options/regym.png')
+    button_level = pygame.image.load('images/options/emh.png')
+    button_znak = pygame.image.load('images/options/znakpyt.png')
+
+    # dod_op_ul = pygame.image.load('images/options/options.png')
+    button_znak = pygame.transform.scale(button_znak, (40, 40))
+    # startcordinates
     x = 100
     y = 50
     x_lev = 550-x
-    #cordinates
+    # cordinates
     y_ulam = y + 100
     but_height = 40
     y_lucky = y_ulam + but_height + 60
@@ -88,7 +91,7 @@ def Settings():
                 run = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 position_mouse = pygame.mouse.get_pos()
-                #regym
+                # regym
                 if position_mouse[0] >= x and position_mouse[1] >= y_ulam:
                     if position_mouse[0] <= x + 150 and position_mouse[1] <= y_ulam + but_height:
                         ulam = True
@@ -100,11 +103,11 @@ def Settings():
                         lucky = True
                         happy = False
                 if position_mouse[0] >= x and position_mouse[1] >= y_happy:
-                    if position_mouse[0]<= x + 150 and position_mouse[1] <= y_happy + but_height:
+                    if position_mouse[0] <= x + 150 and position_mouse[1] <= y_happy + but_height:
                         ulam = False
                         lucky = False
                         happy = True
-                #level
+                # level
                 if position_mouse[0] >= x_lev and position_mouse[1] >= y_ulam:
                     if position_mouse[0] <= x_lev + 95 and position_mouse[1] <= y_ulam + but_height:
                         easy = True
@@ -120,7 +123,7 @@ def Settings():
                         easy = False
                         medium = False
                         hard = True     
-                #dod_info
+                # dod_info
                 if position_mouse[0] >= 30 and position_mouse[1] >= y_happy:
                     if position_mouse[0]<= 60 and position_mouse[1] <= y_happy + but_height:
                         happy_number = True

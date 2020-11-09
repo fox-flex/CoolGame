@@ -25,15 +25,15 @@ def game_intro():
     largeText = pygame.font.SysFont('arial', 69)
     logotype = largeText.render("Asteroid Danger", True, white)
     normText = pygame.font.SysFont('arial', 20)
-    text_1 = "   На  землю  падають  метеорити   "
+    text_1 = "       It is an asteroid rain      "
     story_1 = normText.render(text_1, True, white)
-    text_2 = "Це звичайне явище, зазвичай метеорити згорають в атмосфері"
+    text_2 = "It is a common thing,  asteroids burn up in the atmosphere"
     story_2 = normText.render(text_2, True, white)
-    text_3 = "Але метеорити типів “Улам”, “Хеппі” та “Лакі” не встигають догоріти"
+    text_3 = "But 'Ulam', 'Lucky' and 'Even' rocks do not have time to burn out"
     story_3 = normText.render(text_3, True, white)
-    text_4 = "Завдання Супергероя знайти та знищити метеорити цих типів"
+    text_4 = "  The task of the Superhero is to find and destroy them  "
     story_4 = normText.render(text_4, True, white)
-    text_5 = "Якщо він не встигне позбутися одного з них, то планеті настане кінець"
+    text_5 = "   If he fails to get rid of one of them, the planet will come to an end"
     story_5 = normText.render(text_5, True, white)
     run = True
     while run:
