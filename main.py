@@ -13,8 +13,8 @@ speed = 5
 present_state = 0
 score = 0
 min_num = 1
-max_num = 128
-regime = 'even'
+max_num = 32
+regime = 'ulam'
 lives = 3
 run_field = True
 
@@ -467,6 +467,8 @@ def Settings():
                     if position_mouse[0] <= 700 and position_mouse[1] <= 520:
                         ok_button = True
         global regime
+        global min_num
+        global max_num
         if ulam:
             screen.blit(button_gal, (250, 140))
             regime = 'ulam'
@@ -478,10 +480,16 @@ def Settings():
             regime = 'ulam'
         if easy:
             screen.blit(button_gal, (570, 145))
+            min_num = 1
+            max_num = 32
         if medium:
             screen.blit(button_gal, (570, 245))
+            min_num = 33
+            max_num = 64
         if hard:
             screen.blit(button_gal, (570, 345))
+            min_num = 65
+            max_num = 128
         if ulam_number:
             screen.blit(fon_image, (0, 0))
             screen.blit(fon_image, (0, 0))
