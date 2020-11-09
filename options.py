@@ -65,6 +65,24 @@ def Settings():
         screen.blit(button_hard,(550-x,y+300))
 
         screen.blit(button_ok,(650,470))
+
+        #dodinfo_ulam
+        font = pygame.font.SysFont('Comic Sans MS', 21)
+        follow = font.render('Стандартна послідовність Уляма(або (1, 2)-числа Уляма)',1,(255,0,0))
+        follow1 = font.render('починається з U1 = 1 и U2 = 2.При n > 2, Un визначається',1,(255,0,0))
+        follow2 = font.render('як найменше ціле число більше за Un-1, яке єдиним чином ',1,(255,0,0))
+        follow3 = font.render('розкладається в суму двох різних попередніх членів послідовності.',1,(255,0,0))
+        #dodinfo_lucky
+        follow_l = font.render('Щасливе число - це натуральне число в наборі, яке',1,(255,0,0))
+        follow1_l = font.render('генерується певним "ситом". Це сито схоже на сито Ератосфена,',1,(255,0,0))
+        follow2_l = font.render('яке генерує прості числа, але воно виключає числа на основі',1,(255,0,0))
+        follow3_l = font.render('їх положення в решті набору, а не їх значення (або положення',1,(255,0,0))
+        follow4_l = font.render(' початковому наборі натуральних чисел)',1,(255,0,0))
+        #dodinfo_happy
+        follow_h = font.render('Натуральне число називається щасливим числом, якщо ',1,(255,0,0))
+        follow1_h = font.render('послідовність, яка починається з цього числа, і кожен',1,(255,0,0))
+        follow2_h = font.render('наступний член якої є сумою квадратів цифр попереднього,',1,(255,0,0))
+        follow3_h = font.render('містить член рівний одиниці.',1,(255,0,0))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -112,6 +130,11 @@ def Settings():
                 if position_mouse[0] >= 30 and position_mouse[1] >= y_ulam:
                     if position_mouse[0]<= 60 and position_mouse[1] <= y_ulam + but_height:
                         ulam_number = True
+                if position_mouse[0] >= 310 and position_mouse[1] >= 470:
+                    if position_mouse[0]<= 350 and position_mouse[1] <= 520:
+                        ulam_number = False
+                        happy_number = False
+                        lucky_number = False
         if ulam:
             screen.blit(button_gal,(250,140))
         if lucky:
@@ -124,6 +147,29 @@ def Settings():
             screen.blit(button_gal,(570,245))
         if hard:
             screen.blit(button_gal,(570,345))
+        if ulam_number:
+            screen.blit(fon_image,(0,0))
+            screen.blit(fon_image, (0, 0))
+            screen.blit(button_ok,(310,470))
+            screen.blit(follow,(0,0))
+            screen.blit(follow1,(0,30))
+            screen.blit(follow2,(0,60))
+            screen.blit(follow3,(0,90))
+        if lucky_number:
+            screen.blit(fon_image, (0, 0))
+            screen.blit(button_ok,(310,470))
+            screen.blit(follow_l,(0,0))
+            screen.blit(follow1_l,(0,30))
+            screen.blit(follow2_l,(0,60))
+            screen.blit(follow3_l,(0,90))
+            screen.blit(follow4_l,(0,120))
+        if happy_number:
+            screen.blit(fon_image, (0, 0))
+            screen.blit(button_ok,(310,470))
+            screen.blit(follow_h,(0,0))
+            screen.blit(follow1_h,(0,30))
+            screen.blit(follow2_h,(0,60))
+            screen.blit(follow3,(0,90))    
         pygame.display.update()
     pygame.quit()
 
