@@ -1,10 +1,8 @@
 import pygame
+pygame.init()
 from random import randint
 from time import sleep
 from func import sieve_flavius, ulam, even
-
-import game_over
-
 
 pygame.init()
 win = pygame.display.set_mode((1000, 720))
@@ -104,15 +102,15 @@ def game_field():
     #     pygame.quit()
 
     # def flower(meteor_num):
-        # global flower_img
-        # global win
-        # x = meteors[meteor_num][2]
-        # y = meteors[meteor_num][3]
-        # for i in range(10):
-        #     for frame in range(20):
-        #         win.blit(flower_img[frame], (x + 30, y + i * 10 + frame))
-        #     pygame.display.update()
-        # pass
+    # global flower_img
+    # global win
+    # x = meteors[meteor_num][2]
+    # y = meteors[meteor_num][3]
+    # for i in range(10):
+    #     for frame in range(20):
+    #         win.blit(flower_img[frame], (x + 30, y + i * 10 + frame))
+    #     pygame.display.update()
+    # pass
 
     # function witch say that is number correct or not
     def is_even(num: int) -> bool:
@@ -121,13 +119,11 @@ def game_field():
         else:
             return False
 
-
     def is_lucky(num: int) -> bool:
         if num in sieve_flavius():
             return True
         else:
             return False
-
 
     def is_ulam(num: int) -> bool:
         if num in ulam():
@@ -154,7 +150,7 @@ def game_field():
         elif check_lives():
             del meteors[meteor_num]
         else:
-            game_over.game_over()
+            game_over()
 
     def on_fall_meteor(meteor_num: int, is_correct):
         global score
@@ -163,7 +159,7 @@ def game_field():
         # y = meteors[meteor_num][3]
         # print('on_fall_meteor')
         if is_correct(meteors[meteor_num][0]):
-            game_over.game_over()
+            game_over()
             del meteors[meteor_num]
         else:
             # print('now flower')
@@ -250,6 +246,58 @@ def game_field():
 
         drawWindow()
         pygame.display.update()
+
+
+# run = True
+# win = pygame.display.set_mode((1000, 720))
+# meteors = []
+# lives = 3
+
+
+def game_over():
+    global run
+    global win
+    global meteors
+    global lives
+    display_width = 1000
+    display_height = 720
+    go_bckgr = pygame.image.load('images/earth_1234.jpg')
+
+    over_font_1 = pygame.font.SysFont('arial', 69)
+    over_font_2 = pygame.font.SysFont('arial', 20)
+
+    over_text_1 = over_font_1.render('GAME OVER', True, (255, 255, 255))
+    over_text_2 = over_font_2.render(
+        'Press SPACE to restart,press M to return to menu', True,
+        (255, 255, 255))
+
+    win.blit(go_bckgr, (0, 0))
+    win.blit(over_text_1, ((display_width / 2), (display_height / 3)))
+    win.blit(over_text_2, ((display_width / 4), (display_height / 2)))
+
+    pygame.display.update()
+
+    run0 = True
+    while run0:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run0 = False
+                break
+                # pygame.quit()
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_SPACE:
+                    # open run game function
+                    run0 = False
+                    run = False
+                    meteors = []
+                    lives = 3
+
+                    game_field()
+                elif event.key == pygame.K_m:
+                    # open menu function
+                    run0 = False
+                    run = False
+    pygame.display.update()
 
 
 game_field()

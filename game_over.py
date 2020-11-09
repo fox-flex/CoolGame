@@ -47,8 +47,13 @@ def game_over():
                     run = False
                     meteors = []
                     lives = 3
+
                     game_field.game_field()
                 elif event.key == pygame.K_m:
                     # open menu function
                     run0 = False
                     run = False
+    pygame.display.update()
+
+
+game_over()
