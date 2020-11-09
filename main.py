@@ -1,5 +1,4 @@
 import pygame
-pygame.init()
 from random import randint
 from time import sleep
 from func import sieve_flavius, ulam, even
@@ -259,6 +258,7 @@ def game_over():
     global win
     global meteors
     global lives
+    global score
     display_width = 1000
     display_height = 720
     go_bckgr = pygame.image.load('images/earth_1234.jpg')
@@ -291,13 +291,13 @@ def game_over():
                     run = False
                     meteors = []
                     lives = 3
+                    score = 0
 
                     game_field()
                 elif event.key == pygame.K_m:
                     # open menu function
                     run0 = False
                     run = False
-    pygame.display.update()
-
+        pygame.display.update()
 
 game_field()
