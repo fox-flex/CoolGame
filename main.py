@@ -1,5 +1,6 @@
 import pygame
 from pygame import display
+from pygame import mixer
 from random import randint
 from func import sieve_flavius, ulam, even
 
@@ -521,6 +522,70 @@ def Settings():
             game_intro()
 
 
+def help_window():
+    size = [1000, 480]
+    screen = display.set_mode(size)
+    display.set_caption("Help")
+    display.set_icon(pygame.image.load("images/help/help.png"))
+
+    clock = pygame.time.Clock()
+    fps = 60
+
+    x = 445
+    y = 310
+    image_ok_global = pygame.image.load("images/help/ok.png")
+    image_ok = pygame.transform.scale(image_ok_global, (110, 110))
+
+    # mixer.music.load("audio/music.mp3")
+    # mixer.music.play()
+
+    image_global = pygame.image.load("images/help/asteroid.jpg")
+    image = pygame.transform.scale(image_global, (size))
+
+    font = pygame.font.SysFont("arial", 20)
+    font2 = pygame.font.SysFont("arial", 32)
+    text0 = font2.render("Hello. The rules of the game are as follows:", True,
+                        (255, 255, 255))
+    text1 = font.render("1. You have 3 lives", True, (255, 255, 255))
+    text2 = font.render(
+        "2. You have to catch meteorites with the numbers you choose", True,
+        (255, 255, 255))
+    text3 = font.render("3. To catch, left-click on the meteorite", True,
+                        (255, 255, 255))
+    text4_1 = font.render(
+        "4. If not guessed, the planet explodes, if a meteorite with the correct number falls to earth,",
+        True, (255, 255, 255))
+    text4_2 = font.render(
+        "it also explodes",
+        True, (255, 255, 255))
+
+    text5 = font.render("5. each correct answer +1 point", True,
+                        (255, 255, 255))
+    run_help = True
+    while run_help:
+        screen.blit(image, (0, 0))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run_help = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                position = pygame.mouse.get_pos()
+                if position[0] >= x and position[1] >= y:
+                    if position[0] <= x + 110 and position[1] <= y + 110:
+                        run_help = False
+                        game_intro()
+        high = 50
+        screen.blit(text0, (150, high - 20))
+        screen.blit(text1, (400, high + 30))
+        screen.blit(text2, (180, high + 60))
+        screen.blit(text3, (295, high + 90))
+        screen.blit(text4_1, (42.5, high + 120))
+        screen.blit(text4_2, (415, high + 150))
+        screen.blit(text5, (325, high + 180))
+        screen.blit(image_ok, (x, y))
+        clock.tick(fps)
+        display.update()
+
+
 def game_intro():
     display_width = 1000
     display_height = 720
@@ -572,9 +637,11 @@ def game_intro():
                 if position[0] >= display_width/3.3 and position[1] >= display_height/2:
                     if position[0] <= (display_width/3.3)+200 and position[1] <= (display_height/2)+200:
                         # on click help
-                        pygame.mixer.Sound.play(loss_sound)
-                        # pygame.quit()
-                        # quit()
+                        run_intro = False
+                        help_window()
+                        # pygame.mixer.Sound.play(loss_sound)
+                        pygame.quit()
+                        quit()
                 if position[0] >= display_width/1.8 and position[1] >= display_height/2.2:
                     if position[0] <= (display_width/1.8)+250 and position[1] <= (display_height/2.2)+75:
                         # on click settings
