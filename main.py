@@ -2,7 +2,7 @@ import pygame
 from pygame import display
 from pygame import mixer
 from random import randint
-from func import sieve_flavius, ulam, even
+from func import sieve_flavius_set, ulam_set, even_set
 
 pygame.init()
 win = pygame.display.set_mode((1000, 720))
@@ -10,7 +10,7 @@ win = pygame.display.set_mode((1000, 720))
 # statements
 width = 40
 height = 60
-speed = 5
+speed = 3
 present_state = 0
 score = 0
 min_num = 1
@@ -96,7 +96,6 @@ def game_field():
         else:
             return True
 
-
     # def flower(meteor_num):
     # global flower_img
     # global win
@@ -110,19 +109,19 @@ def game_field():
 
     # function witch say that is number correct or not
     def is_even(num: int) -> bool:
-        if num in even():
+        if num in even_set:
             return True
         else:
             return False
 
     def is_lucky(num: int) -> bool:
-        if num in sieve_flavius():
+        if num in sieve_flavius_set:
             return True
         else:
             return False
 
     def is_ulam(num: int) -> bool:
-        if num in ulam():
+        if num in ulam_set:
             return True
         else:
             return False

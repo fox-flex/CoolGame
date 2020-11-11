@@ -51,3 +51,8 @@ def even() -> set:
         if num % 2 == 0:
             even_lst.append(num)
     return set(even_lst)
+
+
+sieve_flavius_set = sieve_flavius()
+ulam_set = ulam()
+even_set = even()
