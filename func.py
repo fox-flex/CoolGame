@@ -1,10 +1,9 @@
-def sieve_flavius() -> set:
+def sieve_flavius(min_n, max_n) -> set:
     """
     Return set with lucky numbers.
     """
-    n = 100
     pointer = 1
-    lst = list(range(1, n + 1, 2))
+    lst = list(range(1, max_n + 1, 2))
     while pointer < len(lst):
         new_lst = []
         num = lst[pointer]
@@ -13,23 +12,24 @@ def sieve_flavius() -> set:
                 new_lst.append(lst[i])
         lst = new_lst
         pointer += 1
-    return set(lst)
+    ind = 0
+    while lst[ind] < min_n:
+        ind += 1
+    return set(lst[ind:])
 
 
-def ulam() -> set:
+def ulam(min_n, max_n) -> set:
     """
     Return set with ulam numbers.
     """
     ulams = [1, 2]
 
-    limit = 100
-
-    sums = [0 for i in range(2 * limit)]
+    sums = [0 for i in range(2 * max_n)]
 
     newUlam = 2
     sumIndex = 1
 
-    while newUlam < limit:
+    while newUlam < max_n:
         for i in ulams:
             if i < newUlam:
                 sums[i + newUlam] += 1
@@ -38,21 +38,29 @@ def ulam() -> set:
         newUlam = sumIndex
         sumIndex += 1
         ulams.append(newUlam)
-    return set(ulams)
+    ind_down = 0
+    print(ulams)
+    while ulams[ind_down] < min_n:
+        ind_down += 1
+    ind_up = -1
+    while ulams[ind_down] > max_n:
+        ind_up -= 1
+
+    return set(ulams[ind_down:ind_up])
 
 
-def even() -> set:
+def even(min_n, max_n) -> set:
     """
     Return set with even numbers.
     """
-    n = 100
-    even_lst = []
-    for num in range(2, n + 1):
-        if num % 2 == 0:
-            even_lst.append(num)
-    return set(even_lst)
+    even_s = {x for x in range(min_n, max_n + 1) if x % 2 == 0}
+    print()
+    return even_s
 
 
-sieve_flavius_set = sieve_flavius()
-ulam_set = ulam()
-even_set = even()
+print(even(12, 32))
+
+
+# sieve_flavius_set = sieve_flavius()
+# ulam_set = ulam()
+# even_set = even()

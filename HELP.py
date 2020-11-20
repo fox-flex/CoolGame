@@ -20,8 +20,8 @@ def help_window():
     image_ok_global = pygame.image.load("images/help/ok.png")
     image_ok = pygame.transform.scale(image_ok_global, (110, 110))
 
-    mixer.music.load("audio/music.mp3")
-    mixer.music.play()
+    # mixer.music.load("images/audio/music.mp3")
+    # mixer.music.play()
 
 
     image_global = pygame.image.load("images/help/asteroid.jpg")
