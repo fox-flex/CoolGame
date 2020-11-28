@@ -1,16 +1,17 @@
 import pygame
 from pygame import display
 from random import randint
+
 # from func import sieve_flavius, ulam, even
 
 pygame.init()
 win = pygame.display.set_mode((1000, 720))
 
 # statements
-width = 40
-height = 60
+# width = 40
+# height = 60
 speed = 5
-present_state = 0
+# present_state = 0
 score = 0
 regime = 'even'
 difficult = 'easy'
@@ -95,10 +96,11 @@ def game_field():
     win = pygame.display.set_mode((1000, 720))
 
     # statements
-    global width
-    global height
+    # global width
+    # global height
     global speed
     global score
+    global min_num
     global max_num
     global regime
     global lives
@@ -123,11 +125,11 @@ def game_field():
         global min_num
         global max_num
         """
-        new_meteor[0] -> number on meteor
+        new_meteor[0] -> number on meteor (int)
         new_meteor[1] -> frame number
         new_meteor[2] -> coordinate on the X-axis
         new_meteor[3] -> coordinate on the Y-axis
-        new_meteor[4] -> image of number on meteor
+        new_meteor[4] -> number on meteor (image)
         """
         meteor_num = randint(min_num, max_num + 1)
         meteors_num_txt = type_write.render(str(meteor_num), True,
@@ -136,10 +138,12 @@ def game_field():
             [meteor_num, 0, randint(100, 400), -80, meteors_num_txt])
 
     global heart_img
-    global heart_img
     global loss_sound
 
     def show_lives():
+        """
+        draw lives images
+        """
         global lives
         show = 0
         x = 20
@@ -159,7 +163,6 @@ def game_field():
         else:
             return True
 
-
     # def flower(meteor_num):
     # global flower_img
     # global win
@@ -171,7 +174,7 @@ def game_field():
     #     pygame.display.update()
     # pass
 
-    # function witch say that is number correct or not
+    # functions witch say that is number correct or not
     def is_even(num: int) -> bool:
         if num in even_set:
             return True
@@ -190,7 +193,7 @@ def game_field():
         else:
             return False
 
-    def what_type_nums(regime):
+    def what_type_nums(regime: str) -> callable:
         if regime == 'ulam':
             return is_ulam
         if regime == 'even':
@@ -198,11 +201,9 @@ def game_field():
         if regime == 'lucky':
             return is_lucky
 
-    def on_click_meteor(meteor_num: int, is_correct):
+    def on_click_meteor(meteor_num: int, is_correct: callable):
         global score
         global meteors
-        x = meteors[meteor_num][2]
-        y = meteors[meteor_num][3]
         if is_correct(meteors[meteor_num][0]):
             del meteors[meteor_num]
             score += 1
@@ -224,7 +225,6 @@ def game_field():
             score += 1
 
     def drawWindow():
-        global meteor_num
         global meteors
         global win
         win.blit(bg, (0, 0))
@@ -258,7 +258,6 @@ def game_field():
             add_meteor()
 
     # body of game
-    # run = True
     while run_field:
         clock.tick(30)
 
@@ -276,6 +275,7 @@ def game_field():
                     for d_x in range(45, 95):
                         for d_y in range(20, 123):
                             if event.pos == (x + d_x, y + d_y):
+                                # on click
                                 on_click_meteor(i, what_type_nums(regime))
                                 pygame.display.update()
                                 exit_cycle = True
@@ -289,16 +289,12 @@ def game_field():
         if not run_field:
             break
         for i in range(len(meteors)):
-            x = meteors[i][2]
             y = meteors[i][3]
-            meteors[i][2] = x
-            meteors[i][3] = y
             y += speed
             if y >= 530:
                 on_fall_meteor(i, what_type_nums(regime))
                 break
             else:
-                meteors[i][2] = x
                 meteors[i][3] = y
         if not run_field:
             break
@@ -352,7 +348,7 @@ def game_over():
                 run_over = False
                 contin = False
                 break
-            if event.type == pygame.KEYUP:
+            elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_SPACE:
                     # open run game function
                     run_over = False
@@ -458,14 +454,14 @@ def Settings():
     button_regym = pygame.image.load('images/options/regymnum.png')
     button_level = pygame.image.load('images/options/scladnist.png')
     button_znak = pygame.image.load('images/options/znakpyt.png')
-
     # dod_op_ul = pygame.image.load('images/options/options.png')
     button_znak = pygame.transform.scale(button_znak, (40, 40))
-    # startcordinates
+
+    # start coordinates
     x = 100
     y = 50
     x_lev = 550 - x
-    # cordinates
+    # coordinates
     y_ulam = y + 100
     but_height = 40
     y_lucky = y_ulam + but_height + 60
@@ -514,25 +510,32 @@ def Settings():
 
         # dodinfo_ulam
         font = pygame.font.SysFont('Comic Sans MS', 16)
-        follow = font.render('An Ulam number is a member of an integer sequence devised', 1,(255, 0, 0))
+        follow = font.render(
+            'An Ulam number is a member of an integer sequence devised', 1,
+            (255, 0, 0))
         follow1 = font.render(
-            'by and named after Stanislaw Ulam,The standard Ulam sequence (the (1, 2)-Ulam sequence)', 1,
+            'by and named after Stanislaw Ulam,The standard Ulam sequence (the (1, 2)-Ulam sequence)',
+            1,
             (255, 0, 0))
         follow2 = font.render(
-            'starts with U1 = 1 and U2 = 2. Then for n > 2, Un is defined to be the smallest integer that', 1,
+            'starts with U1 = 1 and U2 = 2. Then for n > 2, Un is defined to be the smallest integer that',
+            1,
             (255, 0, 0))
         follow3 = font.render(
             'is the sum of two distinct earlier terms in exactly one way and larger than all earlier terms',
             1, (255, 0, 0))
         # dodinfo_lucky
         follow_l = font.render(
-            'lucky number is a natural number in a set which is generated by a certain "sieve"', 1,
+            'lucky number is a natural number in a set which is generated by a certain "sieve"',
+            1,
             (255, 0, 0))
         follow1_l = font.render(
-            'This sieve is similar to the Sieve of Eratosthenes that generates the primes,', 1,
+            'This sieve is similar to the Sieve of Eratosthenes that generates the primes,',
+            1,
             (255, 0, 0))
         follow2_l = font.render(
-            'numbers based on their position in the remaining set, instead of their value', 1,
+            'numbers based on their position in the remaining set, instead of their value',
+            1,
             (255, 0, 0))
         follow3_l = font.render(
             '(or position in the initial set of natural numbers).', 1,
@@ -544,8 +547,10 @@ def Settings():
             'An integer is even if it is divisible by two', 1,
             (255, 0, 0))
         follow1_h = font.render(
-            ' For example, 6 is even because there is no remainder when dividing it by 2.', 1,
+            ' For example, 6 is even because there is no remainder when dividing it by 2.',
+            1,
             (255, 0, 0))
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -553,26 +558,30 @@ def Settings():
                 position_mouse = pygame.mouse.get_pos()
                 # regime
                 if position_mouse[0] >= x and position_mouse[1] >= y_ulam:
-                    if position_mouse[0] <= x + 75 and position_mouse[1] <= y_ulam + but_height:
+                    if position_mouse[0] <= x + 75 and position_mouse[
+                        1] <= y_ulam + but_height:
                         regime = 'ulam'
                         ulam_b = True
                         lucky_b = False
                         even_b = False
                 if position_mouse[0] >= x and position_mouse[1] >= y_lucky:
-                    if position_mouse[0] <= x + 75 and position_mouse[1] <= y_lucky + but_height:
+                    if position_mouse[0] <= x + 75 and position_mouse[
+                        1] <= y_lucky + but_height:
                         regime = 'lucky'
                         ulam_b = False
                         lucky_b = True
                         even_b = False
                 if position_mouse[0] >= x and position_mouse[1] >= y_happy:
-                    if position_mouse[0] <= x + 75 and position_mouse[1] <= y_happy + but_height:
+                    if position_mouse[0] <= x + 75 and position_mouse[
+                        1] <= y_happy + but_height:
                         regime = 'happy'
                         ulam_b = False
                         lucky_b = False
                         even_b = True
                 # level
                 if position_mouse[0] >= x_lev and position_mouse[1] >= y_ulam:
-                    if position_mouse[0] <= x_lev + 65 and position_mouse[1] <= y_ulam + but_height:
+                    if position_mouse[0] <= x_lev + 65 and position_mouse[
+                        1] <= y_ulam + but_height:
                         difficult = 'easy'
                         min_num = 1
                         max_num = 32
@@ -580,7 +589,8 @@ def Settings():
                         medium = False
                         hard = False
                 if position_mouse[0] >= x_lev and position_mouse[1] >= y_lucky:
-                    if position_mouse[0] <= x_lev + 95 and position_mouse[1] <= y_lucky + but_height:
+                    if position_mouse[0] <= x_lev + 95 and position_mouse[
+                        1] <= y_lucky + but_height:
                         difficult = 'medium'
                         min_num = 32
                         max_num = 64
@@ -588,22 +598,26 @@ def Settings():
                         medium = True
                         hard = False
                 if position_mouse[0] >= x_lev and position_mouse[1] >= y_happy:
-                    if position_mouse[0] <= x_lev + 65 and position_mouse[1] <= y_happy + but_height:
+                    if position_mouse[0] <= x_lev + 65 and position_mouse[
+                        1] <= y_happy + but_height:
                         difficult = 'hard'
                         min_num = 64
                         max_num = 128
                         easy = False
                         medium = False
                         hard = True
-                        # dod_info
+                # dod_info
                 if position_mouse[0] >= 30 and position_mouse[1] >= y_happy:
-                    if position_mouse[0] <= 60 and position_mouse[1] <= y_happy + but_height:
+                    if position_mouse[0] <= 60 and position_mouse[
+                        1] <= y_happy + but_height:
                         happy_number = True
                 if position_mouse[0] >= 30 and position_mouse[1] >= y_lucky:
-                    if position_mouse[0] <= 60 and position_mouse[1] <= y_lucky + but_height:
+                    if position_mouse[0] <= 60 and position_mouse[
+                        1] <= y_lucky + but_height:
                         lucky_number = True
                 if position_mouse[0] >= 30 and position_mouse[1] >= y_ulam:
-                    if position_mouse[0] <= 60 and position_mouse[1] <= y_ulam + but_height:
+                    if position_mouse[0] <= 60 and position_mouse[
+                        1] <= y_ulam + but_height:
                         ulam_number = True
                 if position_mouse[0] >= 310 and position_mouse[1] >= 470:
                     if position_mouse[0] <= 350 and position_mouse[1] <= 520:
@@ -631,17 +645,17 @@ def Settings():
         if ulam_number:
             screen.blit(fon_image, (0, 0))
             screen.blit(button_ok, (310, 470))
-            screen.blit(follow, (80, 0+120))
-            screen.blit(follow1, (10, 30+120))
-            screen.blit(follow2, (10, 60+120))
-            screen.blit(follow3, (10, 90+120))
+            screen.blit(follow, (80, 0 + 120))
+            screen.blit(follow1, (10, 30 + 120))
+            screen.blit(follow2, (10, 60 + 120))
+            screen.blit(follow3, (10, 90 + 120))
         if lucky_number:
             screen.blit(fon_image, (0, 0))
             screen.blit(button_ok, (310, 470))
-            screen.blit(follow_l, (50, 90+30))
-            screen.blit(follow1_l, (50, 120+30))
-            screen.blit(follow2_l, (50, 150+30))
-            screen.blit(follow3_l, (120, 180+30))
+            screen.blit(follow_l, (50, 90 + 30))
+            screen.blit(follow1_l, (50, 120 + 30))
+            screen.blit(follow2_l, (50, 150 + 30))
+            screen.blit(follow3_l, (120, 180 + 30))
         if happy_number:
             screen.blit(fon_image, (0, 0))
             screen.blit(button_ok, (310, 470))
@@ -672,11 +686,16 @@ def game_intro():
     # pygame.mixer.music.load('audio/music_lol.mp3')
     # pygame.mixer.music.play()
     img_2 = pygame.image.load('images/earth_1234.jpg')
-    go_img = pygame.transform.scale(pygame.image.load('images/go_button.png'), (200, 200))
-    help_img = pygame.transform.scale(pygame.image.load('images/help_button.png'), (200, 200))
-    set_img = pygame.transform.scale(pygame.image.load('images/PixelArt.png'), (250, 75))
-    ach_img = pygame.transform.scale(pygame.image.load('images/AchButton.png'), (250, 75))
-    don_img = pygame.transform.scale(pygame.image.load('images/DonButton.png'), (250, 75))
+    go_img = pygame.transform.scale(pygame.image.load('images/go_button.png'),
+                                    (200, 200))
+    help_img = pygame.transform.scale(
+        pygame.image.load('images/help_button.png'), (200, 200))
+    set_img = pygame.transform.scale(pygame.image.load('images/PixelArt.png'),
+                                     (250, 75))
+    ach_img = pygame.transform.scale(pygame.image.load('images/AchButton.png'),
+                                     (250, 75))
+    don_img = pygame.transform.scale(pygame.image.load('images/DonButton.png'),
+                                     (250, 75))
     x_intro = 0
     y_intro = 0
     largeText = pygame.font.SysFont('arial', 69)
@@ -692,6 +711,7 @@ def game_intro():
     story_4 = normText.render(text_4, True, white)
     text_5 = "   If he fails to get rid of one of them, the planet will come to an end"
     story_5 = normText.render(text_5, True, white)
+
     run_intro = True
     while run_intro:
         pygame.display.update()
@@ -703,49 +723,69 @@ def game_intro():
                 run_intro = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 position = pygame.mouse.get_pos()
-                if position[0] >= display_width/7.5 and position[1] >= display_height/2:
-                    if position[0] <= (display_width/7.5)+200 and position[1] <= (display_height/2)+200:
+                if position[0] >= display_width / 7.5 and position[
+                    1] >= display_height / 2:
+                    if position[0] <= (display_width / 7.5) + 200 and position[
+                        1] <= (display_height / 2) + 200:
                         # on click go
                         run_intro = False
                         global run_field
                         run_field = True
                         game_field()
-                if position[0] >= display_width/3.3 and position[1] >= display_height/2:
-                    if position[0] <= (display_width/3.3)+200 and position[1] <= (display_height/2)+200:
+                if position[0] >= display_width / 3.3 and position[
+                    1] >= display_height / 2:
+                    if position[0] <= (display_width / 3.3) + 200 and position[
+                        1] <= (display_height / 2) + 200:
                         # on click help
                         help_window()
                         pygame.quit()
                         quit()
-                if position[0] >= display_width/1.8 and position[1] >= display_height/2.2:
-                    if position[0] <= (display_width/1.8)+250 and position[1] <= (display_height/2.2)+75:
+                if position[0] >= display_width / 1.8 and position[
+                    1] >= display_height / 2.2:
+                    if position[0] <= (display_width / 1.8) + 250 and position[
+                        1] <= (display_height / 2.2) + 75:
                         # on click settings
                         Settings()
                         pygame.quit()
                         quit()
-                if position[0] >= display_width/1.8 and position[1] >= display_height/1.8:
-                    if position[0] <= (display_width/1.8)+250 and position[1] <= (display_height/1.8)+75:
+                if position[0] >= display_width / 1.8 and position[
+                    1] >= display_height / 1.8:
+                    if position[0] <= (display_width / 1.8) + 250 and position[
+                        1] <= (display_height / 1.8) + 75:
                         # on click achievements
                         pygame.mixer.Sound.play(loss_sound)
                         # pygame.quit()
                         # quit()
-                if position[0] >= display_width/1.8 and position[1] >= display_height/1.49:
-                    if position[0] <= (display_width/1.8)+250 and position[1] <= (display_height/1.49)+75:
+                if position[0] >= display_width / 1.8 and position[
+                    1] >= display_height / 1.49:
+                    if position[0] <= (display_width / 1.8) + 250 and position[
+                        1] <= (display_height / 1.49) + 75:
                         # on click donations
                         pygame.mixer.Sound.play(loss_sound)
                         # pygame.quit()
                         # quit()
         gameDisplay.blit(img_2, (x_intro, y_intro))
-        gameDisplay.blit(logotype, ((display_width/3.5), (display_height/20)))
-        gameDisplay.blit(story_1, ((display_width/2.7), (display_height/6)))
-        gameDisplay.blit(story_2, ((display_width/4.4), (display_height/5)))
-        gameDisplay.blit(story_3, ((display_width/4.8), (display_height/4.2)))
-        gameDisplay.blit(story_4, ((display_width/4.2), (display_height/3.65)))
-        gameDisplay.blit(story_5, ((display_width/5.3), (display_height/3.2)))
-        gameDisplay.blit(go_img, ((display_width/7.5), (display_height/2)))
-        gameDisplay.blit(help_img, ((display_width/3.3), (display_height/2)))
-        gameDisplay.blit(set_img, ((display_width/1.8), (display_height/2.2)))
-        gameDisplay.blit(ach_img, ((display_width/1.8), (display_height/1.8)))
-        gameDisplay.blit(don_img, ((display_width/1.8), (display_height/1.49)))
+        gameDisplay.blit(logotype,
+                         ((display_width / 3.5), (display_height / 20)))
+        gameDisplay.blit(story_1,
+                         ((display_width / 2.7), (display_height / 6)))
+        gameDisplay.blit(story_2,
+                         ((display_width / 4.4), (display_height / 5)))
+        gameDisplay.blit(story_3,
+                         ((display_width / 4.8), (display_height / 4.2)))
+        gameDisplay.blit(story_4,
+                         ((display_width / 4.2), (display_height / 3.65)))
+        gameDisplay.blit(story_5,
+                         ((display_width / 5.3), (display_height / 3.2)))
+        gameDisplay.blit(go_img, ((display_width / 7.5), (display_height / 2)))
+        gameDisplay.blit(help_img,
+                         ((display_width / 3.3), (display_height / 2)))
+        gameDisplay.blit(set_img,
+                         ((display_width / 1.8), (display_height / 2.2)))
+        gameDisplay.blit(ach_img,
+                         ((display_width / 1.8), (display_height / 1.8)))
+        gameDisplay.blit(don_img,
+                         ((display_width / 1.8), (display_height / 1.49)))
         # pygame.display.update()
         clock.tick(30)
 
